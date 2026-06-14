@@ -1,12 +1,6 @@
-/* ============================================================
-   THE CONNECTION GAP — shared interactions
-   Every feature is guarded so one file works across all pages.
-   ============================================================ */
 (function () {
   "use strict";
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ---------- Mobile nav ---------- */
   const toggle = document.querySelector(".nav-toggle");
   const links = document.querySelector(".nav-links");
   if (toggle && links) {
@@ -21,8 +15,6 @@
       })
     );
   }
-
-  /* ---------- Scroll reveal ---------- */
   const reveals = document.querySelectorAll(".reveal");
   if (reveals.length && "IntersectionObserver" in window && !prefersReduced) {
     const io = new IntersectionObserver(
@@ -40,8 +32,6 @@
   } else {
     reveals.forEach((r) => r.classList.add("in"));
   }
-
-  /* ---------- Animated counters ---------- */
   function animateCount(el) {
     const target = parseFloat(el.dataset.count);
     const decimals = (el.dataset.count.split(".")[1] || "").length;
@@ -72,8 +62,6 @@
   } else {
     counters.forEach((c) => (c.textContent = c.dataset.count + (c.dataset.suffix || "")));
   }
-
-  /* ---------- Three-level divide accordion ---------- */
   document.querySelectorAll(".level").forEach((lv) => {
     lv.setAttribute("tabindex", "0");
     lv.setAttribute("role", "button");
@@ -90,8 +78,6 @@
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
     });
   });
-
-  /* ---------- Quintile gap chart ---------- */
   const chart = document.querySelector("[data-chart='quintile']");
   if (chart) {
     const data = {
@@ -124,10 +110,6 @@
       });
     });
   }
-
-  /* ---------- Timeline (static; content always visible) ---------- */
-
-  /* ---------- Knowledge-check quiz ---------- */
   const quiz = document.querySelector("[data-quiz]");
   if (quiz) {
     let answered = 0, correct = 0;
@@ -159,8 +141,6 @@
       });
     });
   }
-
-  /* ---------- Scroll progress bar ---------- */
   (function () {
     const bar = document.createElement("div");
     bar.className = "scroll-progress";
@@ -175,8 +155,6 @@
     window.addEventListener("resize", update);
     update();
   })();
-
-  /* ---------- Theme toggle (light / dark) ---------- */
   (function () {
     const root = document.documentElement;
     const KEY = "tcg-theme";
@@ -199,8 +177,6 @@
       })
     );
   })();
-
-  /* ---------- Video facade (load embed on demand) ---------- */
   document.querySelectorAll(".video-lite").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.dataset.yt;
@@ -215,8 +191,6 @@
       frame.appendChild(iframe);
     });
   });
-
-  /* ---------- Footer year ---------- */
   const yr = document.querySelector("[data-current-year]");
   if (yr) yr.textContent = new Date().getFullYear();
 })();
